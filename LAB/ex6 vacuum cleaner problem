@@ -1,0 +1,33 @@
+# Vacuum Cleaner Problem
+
+# Input
+left_room = input("Enter Left Room status (Clean/Dirty): ")
+right_room = input("Enter Right Room status (Clean/Dirty): ")
+position = input("Enter Vacuum position (Left/Right): ")
+
+print("\nInitial State")
+print("Left Room :", left_room)
+print("Right Room:", right_room)
+print("Vacuum Position:", position)
+
+# Vacuum Cleaning Process
+while left_room == "Dirty" or right_room == "Dirty":
+
+    if position == "Left":
+        if left_room == "Dirty":
+            print("\nVacuum cleans Left Room")
+            left_room = "Clean"
+        position = "Right"
+        print("Vacuum moves to Right Room")
+
+    elif position == "Right":
+        if right_room == "Dirty":
+            print("\nVacuum cleans Right Room")
+            right_room = "Clean"
+        position = "Left"
+        print("Vacuum moves to Left Room")
+
+print("\nFinal State")
+print("Left Room :", left_room)
+print("Right Room:", right_room)
+print("Both rooms are clean.")
