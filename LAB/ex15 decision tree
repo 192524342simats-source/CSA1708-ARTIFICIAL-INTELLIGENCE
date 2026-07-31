@@ -1,0 +1,17 @@
+# Simple Decision Tree (without sklearn)
+
+# Training Data
+X = [1, 2, 3, 4, 5]
+Y = ["Fail", "Fail", "Pass", "Pass", "Pass"]
+
+# Test value
+test = 4
+
+# Decision Rule
+if test >= 3:
+    prediction = "Pass"
+else:
+    prediction = "Fail"
+
+print("Study Hours:", test)
+print("Prediction:", prediction)
