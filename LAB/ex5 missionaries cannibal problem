@@ -1,0 +1,59 @@
+from collections import deque
+
+# Check whether a state is valid
+def is_valid(m_left, c_left, M, C):
+    m_right = M - m_left
+    c_right = C - c_left
+
+    if m_left < 0 or c_left < 0 or m_left > M or c_left > C:
+        return False
+
+    if (m_left > 0 and c_left > m_left):
+        return False
+
+    if (m_right > 0 and c_right > m_right):
+        return False
+
+    return True
+
+# Solve using BFS
+def solve(M, C):
+    start = (M, C, 'L')      # (Missionaries Left, Cannibals Left, Boat Side)
+    goal = (0, 0, 'R')
+
+    queue = deque([(start, [])])
+    visited = set()
+
+    while queue:
+        (m, c, boat), path = queue.popleft()
+
+        if (m, c, boat) in visited:
+            continue
+
+        visited.add((m, c, boat))
+        path = path + [(m, c, boat)]
+
+        if (m, c, boat) == goal:
+            print("\nSolution Found:\n")
+            for step in path:
+                print(step)
+            return
+
+        moves = [(2,0), (0,2), (1,1), (1,0), (0,1)]
+
+        for dm, dc in moves:
+            if boat == 'L':
+                new_state = (m-dm, c-dc, 'R')
+            else:
+                new_state = (m+dm, c+dc, 'L')
+
+            if is_valid(new_state[0], new_state[1], M, C):
+                queue.append((new_state, path))
+
+    print("No Solution Exists.")
+
+# Main Program
+M = int(input("Enter number of Missionaries: "))
+C = int(input("Enter number of Cannibals: "))
+
+solve(M, C)
